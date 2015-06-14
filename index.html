@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html ng-app="Miner">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Mining idle game</title>
+    <link rel="stylesheet" href="./bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./bootstrap/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="./css/theme.css">
+</head>
+<body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Miner</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="#">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+
+    <div class="container" ng-controller="MinerCtrl as miner">
+
+        <div id="resources">
+            <div class="row">
+                <div class="col-sm-1" ng-repeat="res in miner.res._resourses">
+                    {{res}}: x{{miner.res[res] | number}}
+                </div>
+                <div class="col-sm-4">
+                    Cash: {{miner.cash | currency}}
+                </div>
+            </div>
+        </div>
+
+        <div id="office">
+            <div class="row">
+
+                <div class="col-sm-4 center">
+                    <button type="button" class="btn btn-default" data-toggle="modal" data-target="#sell-center">
+                        Open sell center
+                    </button>
+                </div>
+
+                <div class="col-sm-4 center">
+                    <button type="button" class="btn btn-default" data-toggle="modal" data-target="#employee-center">
+                        Open employee center
+                    </button>
+                </div>
+
+                <div class="col-sm-4 center">
+                    <button type="button" class="btn btn-default" data-toggle="modal" data-target="#upgrade-center">
+                        Open upgrade center
+                    </button>
+                </div>
+                
+                <div class="modal fade" id="sell-center" tabindex="-1" role="dialog" aria-labelledby="SellCenter" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title" id="myModalLabel">Sell center</h4>
+                            </div>
+                            <div class="modal-body">
+                                <div class="container-fluid">
+                                    <div class="row" ng-repeat="res in miner.res._resourses" style="padding: 4px;">
+                                        <div class="col-sm-2">
+                                            <button type="button" class="btn btn-default" ng-click="miner.sell(res, miner)" 
+                                                                                          ng-show="miner.res.cost(res)">Sell all</button>
+                                        </div>
+                                        <div class="col-sm-2">{{res}}:</div>
+                                        <div class="col-sm-2">x{{miner.res[res] | number}}</div>
+                                        <div class="col-sm-2">{{miner.res.cost(res) | currency}}</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal fade" id="employee-center" tabindex="-1" role="dialog" aria-labelledby="EmployeeCenter" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title" id="myModalLabel">Employee center</h4>
+                            </div>
+                            <div class="modal-body">
+                                <div class="container-fluid">
+                                    <div class="row" ng-repeat="level in miner.levels" style="padding: 4px;">
+                                        <div class="col-sm-3">
+                                            Level {{level.level | number}}:
+                                        </div>
+                                        <div class="col-sm-2">
+                                            {{level.getWorkerCost() | currency}}
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <button type="button" class="btn btn-default" ng-click="miner.hireWorker(level)" 
+                                                                                          ng-show="miner.canHire(level)">Hire</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal fade" id="upgrade-center" tabindex="-1" role="dialog" aria-labelledby="UpgradeCenter" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title" id="myModalLabel">Upgrade center</h4>
+                            </div>
+                            <div class="modal-body">
+                                <div class="container-fluid">
+                                    <div class="row" style="padding: 4px;">
+                                        <div class="col-sm-3">
+                                            Dig new level:
+                                        </div>
+                                        <div class="col-sm-2">
+                                            {{miner.getNewLevelCost() | currency}}
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <button type="button" class="btn btn-default" ng-click="miner.digNewLevel()" 
+                                                                                          ng-show="miner.canDigNewLevel()">Dig</button>
+                                        </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div id="mine">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="panel panel-default" ng-repeat="level in miner.levels">
+                        <div class="panel-heading">Mining level: {{level.level | number}}, workers: {{level.workers.length | number}}</div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-sm-1">
+                                    <div class="miner-site">
+                                        <div class="ores" data-toggle="tooltip" data-placement="bottom" title="Click to dig there" ng-click="level.dig()"></div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-1" ng-repeat="worker in level.workers">
+                                    <div class="miner-site">
+                                        <div class="miner active"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="./bootstrap/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.16/angular.min.js"></script>
+    <script src="./js/game.js"></script>
+    <script>
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        })
+    </script>
+</body>
+</html>

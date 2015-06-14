@@ -1,0 +1,27 @@
+body {
+    padding-top: 70px;
+    padding-bottom: 30px;
+}
+
+div.miner-site {
+    width: 78px;
+}
+
+div.miner-site div.miner,
+div.miner-site div.ores {
+    width: 78px;
+    height: 75px;
+}
+
+div.miner-site div.ores {
+    background: url("../img/ores.svg");
+    background-size: 78px 75px;
+}
+
+div.miner-site div.miner.active {
+    background: url("../img/miner.gif");
+}
+
+div#office div.center {
+    padding: 20px;
+}
