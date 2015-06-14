@@ -1,0 +1,11 @@
+<div id="resources">
+    <div class="row">
+        <div class="col-sm-1" ng-repeat="resourceName in header.resources.getNames()">
+            {{resourceName}}: <br>
+            x{{header.resources[resourceName] | number}}
+        </div>
+        <div class="col-sm-4">
+            Cash: {{header.resources.cash | currency}}
+        </div>
+    </div>
+</div>
