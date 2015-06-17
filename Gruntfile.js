@@ -28,17 +28,35 @@ function configureGrunt(grunt) {
                     dest: 'dist/'
                 }]
             },
-            libs: {
+            images: {
                 files: [{
                     expand: true,
-                    cwd: 'src/libs/',
-                    src: [
-                        'angular/angular.min.js',
-                        'angular-ui-router/release/angular-ui-router.min.js',
-                        'bootstrap/dist/css/bootstrap.min.css'
-                    ],
-                    dest: 'dist/libs/'
+                    cwd: 'src/',
+                    src: 'img/*',
+                    dest: 'dist/'
                 }]
+            },
+            libs: {
+                files: [
+                    {
+                        expand: true,
+                        cwd: 'src/libs/',
+                        src: 'angular/angular.min.js',
+                        dest: 'dist/libs/'
+                    },
+                    {
+                        expand: true,
+                        cwd: 'src/libs/',
+                        src: 'angular-ui-router/release/angular-ui-router.min.js',
+                        dest: 'dist/libs/'
+                    },
+                    {
+                        expand: true,
+                        cwd: 'src/libs/',
+                        src: 'bootstrap/dist/css/bootstrap.min.css',
+                        dest: 'dist/libs/'
+                    }
+                ]
             }
         },
         concat: {

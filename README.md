@@ -1,7 +1,19 @@
-# Install
+# Requirements
 
-Unzip `bootstrap-3.3.4-dist.zip` to root directory under name `bootstrap`.
+1. nodejs
+2. npm
 
 # Quick start
 
-Lauch `index.html` or visit http://koutoftimer.github.io/ in your favorite browser and have a fun.
+    $ npm install
+    $ bower install
+    $ grunt build
+    $ grunt dev
+
+Or use oneliner
+
+    $ npm install && bower install && grunt build && grunt dev
+
+Then browse http://localhost:8000
+
+Playable version located at http://koutoftimer.github.io

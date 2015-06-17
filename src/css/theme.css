@@ -17,6 +17,7 @@ div.miner-site div.miner.active {
     background: url("../img/miner.gif");
 }
 
-div#office div.center {
+div#office .office-center {
     padding: 20px;
+    height: 60px;
 }

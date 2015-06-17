@@ -27,11 +27,11 @@
         }
 
         function getNewLevelCost() {
-            return Math.pow(10, service.levels.length);
+            return Math.pow(60, service.levels.length);
         }
 
     }
-    
+
     function Level(deep) {
         var level = this;
 
@@ -42,17 +42,17 @@
     Level.prototype.addWorker = function() {
         var level = this;
         level.workers.push(new Worker(level.deep));
-    }
+    };
 
     Level.prototype.dig = function() {
         var level = this;
         return {Coal: Math.pow(10, level.deep - 1)};
-    }
+    };
 
     Level.prototype.getNewWorkerCost = function() {
         var level = this;
         return Math.pow(10, level.deep) * Math.pow(1.4, level.workers.length);
-    }
+    };
 
     function Worker(deep) {
         var worker = this;

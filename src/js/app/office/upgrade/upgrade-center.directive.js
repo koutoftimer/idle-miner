@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('app.components')
+        .module('app.office')
         .directive('mnrUpgradeCenter', UpgradeCenterDirective);
 
     UpgradeCenterDirective.$inject = [];
@@ -13,7 +13,7 @@
             controller: 'UpgradeCenterController',
             controllerAs: 'upgradeCenter',
             restrict: 'EA',
-            templateUrl: 'js/app/components/office/upgrade-center.directive.html'
+            templateUrl: 'js/app/office/upgrade/upgrade-center.directive.html'
         };
 
         return directive;

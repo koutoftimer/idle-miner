@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('app.components')
+        .module('app.office')
         .controller('UpgradeCenterController', UpgradeCenterController);
 
     UpgradeCenterController.$inject = ['resources', 'levels'];

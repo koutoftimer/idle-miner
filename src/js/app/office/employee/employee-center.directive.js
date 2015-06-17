@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('app.components')
+        .module('app.office')
         .directive('mnrEmployeeCenter', EmployeeCenter);
 
     EmployeeCenter.$inject = [];
@@ -13,7 +13,7 @@
             controller: 'EmployeeCenterController',
             controllerAs: 'employeeCenter',
             restrict: 'EA',
-            templateUrl: 'js/app/components/office/employee-center.directive.html'
+            templateUrl: 'js/app/office/employee/employee-center.directive.html'
         };
 
         return directive;

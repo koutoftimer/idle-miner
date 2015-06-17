@@ -5,9 +5,9 @@
         .module('app.components')
         .factory('resources', ResourcesService);
 
-    ResourcesService.$inject = [];
+    ResourcesService.$inject = ['$interval', 'levels'];
 
-    function ResourcesService() {
+    function ResourcesService($interval, levels) {
         var costs = {},
             resources = {
                 add: addResources,
@@ -22,13 +22,21 @@
         return resources;
 
         function activate() {
-            var cost = 1;
+            resourcesNames.forEach(initResource);
+            $interval(dig, 1000);
 
-            resourcesNames.forEach(function(name) {
+            function initResource(name, index) {
                 resources[name] = 0;
-                costs[name] = cost;
-                cost *= 2;
-            });
+                costs[name] = Math.pow(2, index + 1);
+            }
+
+            function dig() {
+                levels.levels.forEach(function(level) {
+                    level.workers.forEach(function(worker) {
+                        resources.add(worker.dig());
+                    });
+                });
+            }
         }
 
         function addResources(resourcesList) {
