@@ -1,0 +1,20 @@
+{
+  "name": "Miner",
+  "version": "0.0.1",
+  "homepage": "http://koutoftimer.github.io/",
+  "authors": [
+    "Ruslan Kovtun <koutoftimer@gmail.com>"
+  ],
+  "description": "Idle miner clicker",
+  "main": "index.html",
+  "keywords": [
+    "game",
+    "clicker"
+  ],
+  "license": "MIT",
+  "devDependencies": {
+    "bootstrap": "~3.3.4",
+    "angular": "~1.4.0",
+    "angular-ui-router": "~0.2.15"
+  }
+}
