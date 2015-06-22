@@ -5,11 +5,13 @@
         .module('app.core')
         .service('levels', LevelsService);
 
-    var levelConfig = {};
+    var levelConfig = {
+        getConfig: getConfig
+    };
 
-    LevelsService.$inject = ['$interval', 'resources'];
+    LevelsService.$inject = ['$http', '$interval', '$rootScope', 'localStorageService', 'resources'];
 
-    function LevelsService($interval, resources) {
+    function LevelsService($http, $interval, $rootScope, localStorageService, resources) {
         var service = {
                 addLevel: addLevel,
                 getNewLevelCost: getNewLevelCost,
@@ -21,9 +23,9 @@
         return service;
 
         function activate() {
-            service.addLevel();
+            initLevels();
+            watchLevels();
             initLevelConfig();
-
             $interval(dig, 1000);
 
             function dig() {
@@ -34,40 +36,56 @@
                 });
             }
 
+            function initLevels() {
+                var keys = localStorageService.keys();
+
+                if (keys.indexOf('levels') == -1) {
+                    service.addLevel();
+                } else {
+                    var levels = localStorageService.get('levels');
+                    Object.keys(levels).forEach(function (depth) {
+                        service.addLevel();
+                        for (var i = 0; i < levels[depth].workers; ++i) {
+                            service.levels[depth - 1].addWorker();
+                        }
+                    })
+                }
+            }
+
             function initLevelConfig() {
                 levelConfig.names = resources.getNames();
 
-                levelConfig[1] = angular.extend(getNullChances(), {
-                    coal: {
-                        chance: 1,
-                        quantity: 1
-                    }
-                });
+                $http.get('js/app/config/levels.json')
+                    .success(function(data, status, headers, config) {
+                        angular.extend(levelConfig, data);
 
-                levelConfig[2] = angular.extend(getNullChances(), {
-                    coal: {
-                        chance: 0.95,
-                        quantity: 2
-                    },
-                    iron: {
-                        chance: 1,
-                        quantity: 1
-                    }
-                });
-
-                function getNullChances() {
-                    var nullChance = {
-                            chance: 0,
-                            quantity: 0
-                        },
-                        nullChances = {};
-
-                    levelConfig.names.forEach(function(name) {
-                        nullChances[name] = nullChance;
+                        var levels = Object.keys(levelConfig).filter(function(value) {
+                            return value != 'names'
+                        });
+                        levelConfig.levels = levels.sort();
+                    })
+                    .error(function(data, status, headers, config) {
+                        // handle error
+                        console.log('WARNING: can not load levels config');
                     });
+            }
 
-                    return nullChances;
-                }
+            function watchLevels() {
+                $rootScope.$watch(
+                    function () {
+                        var result = {};
+                        service.levels.forEach(function (level) {
+                            result[level.depth] = {
+                                workers: level.workers.length
+                            }
+                        });
+                        return JSON.stringify(result);
+                    },
+                    function (newValue, oldValue) {
+                        var levels = JSON.parse(newValue);
+                        localStorageService.set('levels', levels);
+                    }
+                )
             }
         }
 
@@ -101,7 +119,7 @@
     Worker.prototype.dig = workerDig;
 
     function dig(depth) {
-        var config = levelConfig[depth];
+        var config = getConfig(depth);
 
         for (var i = 0; i < levelConfig.names.length; ++i) {
             var resourceName = levelConfig.names[i];
@@ -111,6 +129,15 @@
                 return result;
             }
         }
+    }
+
+    function getConfig(depth) {
+        for (var level in levelConfig.levels) {
+            if (depth <= level) {
+                return levelConfig[level];
+            }
+        }
+        return levelConfig[levelConfig.levels[levelConfig.length - 1]]
     }
 
     function levelAddWorker() {

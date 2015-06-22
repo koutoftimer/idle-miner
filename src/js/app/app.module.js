@@ -8,10 +8,12 @@
             'app.underground-mining',
             'app.office',
             'app.resources',
-            'ui.router'
+            'ui.router',
+            'LocalStorageModule'
         ])
         .run(bindState)
-        .config(configureRouter);
+        .config(configureRouter)
+        .config(configureLocalStorage);
 
     bindState.$inject = ['$rootScope', '$state', '$stateParams'];
 
@@ -29,6 +31,13 @@
         });
         $urlRouterProvider
             .otherwise('/');
+    }
+
+    configureLocalStorage.$inject = ['localStorageServiceProvider'];
+
+    function configureLocalStorage(localStorageServiceProvider) {
+        localStorageServiceProvider
+            .setPrefix('idle-miner')
     }
 
 })();

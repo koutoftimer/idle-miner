@@ -1,0 +1,42 @@
+{
+  "1": {
+    "coal": {
+      "chance": 1,
+      "quantity": 1
+    }
+  },
+  "2": {
+    "coal": {
+      "chance": 0.95,
+      "quantity": 3
+    },
+    "iron": {
+      "chance": 1,
+      "quantity": 1
+    }
+  },
+  "3": {
+    "coal": {
+      "chance": 0.80,
+      "quantity": 8
+    },
+    "iron": {
+      "chance": 1,
+      "quantity": 2
+    }
+  },
+  "4": {
+    "coal": {
+      "chance": 0.60,
+      "quantity": 19
+    },
+    "iron": {
+      "chance": 0.35,
+      "quantity": 5
+    },
+    "tin": {
+      "chance": 1,
+      "quantity": 2
+    }
+  }
+}

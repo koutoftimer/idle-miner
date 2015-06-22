@@ -16,7 +16,7 @@ function configureGrunt(grunt) {
                 files: [{
                     expand: true,
                     cwd: 'src/',
-                    src: ['**/*.html', '!libs/*'],
+                    src: ['**/*.html', '!libs/**/*.html'],
                     dest: 'dist/'
                 }]
             },
@@ -24,7 +24,19 @@ function configureGrunt(grunt) {
                 files: [{
                     expand: true,
                     cwd: 'src/',
-                    src: ['**/*.css', '!libs/*'],
+                    src: ['**/*.css', '!libs/**/*.css'],
+                    dest: 'dist/'
+                }]
+            },
+            json: {
+                files: [{
+                    expand: true,
+                    cwd: 'src/',
+                    src: [
+                        '**/*.json',
+                        '!libs/**/*.json',
+                        '!bower.json'
+                    ],
                     dest: 'dist/'
                 }]
             },
@@ -42,6 +54,12 @@ function configureGrunt(grunt) {
                         expand: true,
                         cwd: 'src/libs/',
                         src: 'angular/angular.min.js',
+                        dest: 'dist/libs/'
+                    },
+                    {
+                        expand: true,
+                        cwd: 'src/libs/',
+                        src: 'angular-local-storage/dist/angular-local-storage.min.js',
                         dest: 'dist/libs/'
                     },
                     {
@@ -79,6 +97,10 @@ function configureGrunt(grunt) {
             js: {
                 files: ['src/js/**/*.js'],
                 tasks: ['concat:js', 'uglify:js']
+            },
+            json: {
+                files: ['src/**/*.json'],
+                tasks: ['copy:json']
             },
             css: {
                 files: ['src/css/**/*.css'],
