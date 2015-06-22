@@ -3,26 +3,32 @@
 
     angular
         .module('app', [
-            'app.mine',
+            'app.core',
+            'app.home',
+            'app.underground-mining',
             'app.office',
+            'app.resources',
             'ui.router'
         ])
-        .run([
-            '$rootScope', '$state', '$stateParams',
-            function($rootScope, $state, $stateParams) {
-                $rootScope.$state = $state;
-                $rootScope.$stateParams = $stateParams;
-            }
-        ])
-        .config([
-            '$locationProvider', '$urlRouterProvider',
-            function($locationProvider, $urlRouterProvider) {
-                $locationProvider.html5Mode({
-                    enabled: true,
-                    requireBase: false
-                });
-                $urlRouterProvider
-                    .otherwise('/');
-            }
-        ]);
+        .run(bindState)
+        .config(configureRouter);
+
+    bindState.$inject = ['$rootScope', '$state', '$stateParams'];
+
+    function bindState($rootScope, $state, $stateParams) {
+        $rootScope.$state = $state;
+        $rootScope.$stateParams = $stateParams;
+    }
+
+    configureRouter.$inject = ['$locationProvider', '$urlRouterProvider'];
+
+    function configureRouter($locationProvider, $urlRouterProvider) {
+        $locationProvider.html5Mode({
+            enabled: true,
+            requireBase: false
+        });
+        $urlRouterProvider
+            .otherwise('/');
+    }
+
 })();

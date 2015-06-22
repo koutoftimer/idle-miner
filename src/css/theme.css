@@ -18,6 +18,11 @@ div.miner-site div.miner.active {
 }
 
 div#office .office-center {
+    text-align: center;
     padding: 20px;
     height: 60px;
+}
+
+div#office .office-center:hover {
+    font-size: 120%;
 }

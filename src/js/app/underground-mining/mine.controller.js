@@ -2,12 +2,12 @@
     'use strict';
 
     angular
-        .module('app.components')
+        .module('app.underground-mining')
         .controller('MineController', MineController);
 
-    MineController.$inject = ['resources', 'levels', '$interval'];
+    MineController.$inject = ['resources', 'levels'];
 
-    function MineController(resources, levels, $interval) {
+    function MineController(resources, levels) {
         var mine = this;
         
         mine.dig = dig;

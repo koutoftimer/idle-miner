@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('app.components')
+        .module('app.underground-mining')
         .directive('mnrMine', MineDirective);
 
     MineDirective.$inject = [];
@@ -13,7 +13,7 @@
             controller: 'MineController',
             controllerAs: 'mine',
             restrict: 'EA',
-            templateUrl: 'js/app/components/mine/mine.directive.html'
+            templateUrl: '/js/app/underground-mining/mine.directive.html'
         };
 
         return directive;

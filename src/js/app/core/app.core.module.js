@@ -2,5 +2,6 @@
     'use strict';
 
     angular
-        .module('app.components', [])
+        .module('app.core', []);
+
 })();
