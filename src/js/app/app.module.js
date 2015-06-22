@@ -38,7 +38,6 @@
     function configureLocalStorage(localStorageServiceProvider) {
         localStorageServiceProvider
             .setPrefix('idle-miner')
-            .setStorageType('sessionStorage')
     }
 
 })();
