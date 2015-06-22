@@ -36,7 +36,9 @@
     activateResourcesNames();
 
 
-    function ResourcesService() {
+    ResourcesService.$inject = ['$rootScope', 'localStorageService'];
+
+    function ResourcesService($rootScope, localStorageService) {
         var service = new ResourcesList();
 
         activate();
@@ -44,7 +46,22 @@
         return service;
 
         function activate() {
+            var keys = localStorageService.keys();
+
             service.cash = 0;
+
+            if (keys.indexOf('money') != -1) {
+                service.cash = localStorageService.get('money')
+            }
+
+            $rootScope.$watch(
+                function() {
+                    return service.cash;
+                },
+                function(newValue, oldValue) {
+                    localStorageService.set('money', newValue);
+                }
+            )
         }
     }
 

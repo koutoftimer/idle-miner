@@ -5,11 +5,13 @@
         .module('app.core')
         .service('levels', LevelsService);
 
-    var levelConfig = {};
+    var levelConfig = {
+        getConfig: getConfig
+    };
 
-    LevelsService.$inject = ['$interval', 'resources'];
+    LevelsService.$inject = ['$http', '$interval', 'resources'];
 
-    function LevelsService($interval, resources) {
+    function LevelsService($http, $interval, resources) {
         var service = {
                 addLevel: addLevel,
                 getNewLevelCost: getNewLevelCost,
@@ -23,7 +25,6 @@
         function activate() {
             service.addLevel();
             initLevelConfig();
-
             $interval(dig, 1000);
 
             function dig() {
@@ -37,37 +38,19 @@
             function initLevelConfig() {
                 levelConfig.names = resources.getNames();
 
-                levelConfig[1] = angular.extend(getNullChances(), {
-                    coal: {
-                        chance: 1,
-                        quantity: 1
-                    }
-                });
+                $http.get('js/app/config/levels.json')
+                    .success(function(data, status, headers, config) {
+                        angular.extend(levelConfig, data);
 
-                levelConfig[2] = angular.extend(getNullChances(), {
-                    coal: {
-                        chance: 0.95,
-                        quantity: 2
-                    },
-                    iron: {
-                        chance: 1,
-                        quantity: 1
-                    }
-                });
-
-                function getNullChances() {
-                    var nullChance = {
-                            chance: 0,
-                            quantity: 0
-                        },
-                        nullChances = {};
-
-                    levelConfig.names.forEach(function(name) {
-                        nullChances[name] = nullChance;
+                        var levels = Object.keys(levelConfig).filter(function(value) {
+                            return value != 'names'
+                        });
+                        levelConfig.levels = levels.sort();
+                    })
+                    .error(function(data, status, headers, config) {
+                        // handle error
+                        console.log('WARNING: can not load levels config');
                     });
-
-                    return nullChances;
-                }
             }
         }
 
@@ -101,7 +84,7 @@
     Worker.prototype.dig = workerDig;
 
     function dig(depth) {
-        var config = levelConfig[depth];
+        var config = getConfig(depth);
 
         for (var i = 0; i < levelConfig.names.length; ++i) {
             var resourceName = levelConfig.names[i];
@@ -111,6 +94,15 @@
                 return result;
             }
         }
+    }
+
+    function getConfig(depth) {
+        for (var level in levelConfig.levels) {
+            if (depth <= level) {
+                return levelConfig[level];
+            }
+        }
+        return levelConfig[levelConfig.levels[levelConfig.length - 1]]
     }
 
     function levelAddWorker() {
