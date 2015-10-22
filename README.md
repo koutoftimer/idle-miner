@@ -1,11 +1,13 @@
+* Requirements
+* Quick start
+{:toc}
+
 # Requirements
-:toc:
 
 1. nodejs
 2. npm
 
 # Quick start
-:toc:
 
     $ npm install
     $ bower install
