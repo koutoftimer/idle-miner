@@ -1,23 +1,25 @@
-* Requirements
-* Quick start
+# API title
+
+* TOC
 {:toc}
 
-# Requirements
+## API endpoint title
 
-1. nodejs
-2. npm
+    [VERB] /path/to/endpoint
 
-# Quick start
+### Parameters
 
-    $ npm install
-    $ bower install
-    $ grunt build
-    $ grunt dev
+Name | Type | Description
+-----|------|--------------
+`name`|`type` | Description.
 
-Or use oneliner
+### Input (request JSON body)
 
-    $ npm install && bower install && grunt build && grunt dev
+Name | Type | Description
+-----|------|--------------
+`name`|`type` | Description.
 
-Then browse http://localhost:8000
+### Response
 
-Playable version located at http://koutoftimer.github.io
+<%= headers 200, :pagination => default_pagination_rels, 'X-Custom-Header' => "value" %>
+<%= json :resource_name %>
