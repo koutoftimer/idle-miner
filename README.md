@@ -23,3 +23,7 @@ Name | Type | Description
 
 <%= headers 200, :pagination => default_pagination_rels, 'X-Custom-Header' => "value" %>
 <%= json :resource_name %>
+
+{:.terminal}
+    $ curl foobar
+    
