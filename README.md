@@ -16,4 +16,4 @@ Or use oneliner
 
 Then browse http://localhost:8000
 
-Playable version located at http://koutoftimer.github.io
+Playable version located at http://koutoftimer.github.io/idle-miner/
