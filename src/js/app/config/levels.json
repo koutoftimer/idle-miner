@@ -8,35 +8,141 @@
   "2": {
     "coal": {
       "chance": 0.95,
-      "quantity": 3
+      "quantity": 50
     },
     "iron": {
       "chance": 1,
-      "quantity": 1
+      "quantity": 10
     }
   },
   "3": {
     "coal": {
       "chance": 0.80,
-      "quantity": 8
+      "quantity": 250
     },
     "iron": {
       "chance": 1,
-      "quantity": 2
+      "quantity": 50
     }
   },
   "4": {
     "coal": {
-      "chance": 0.60,
-      "quantity": 19
+      "chance": 0.40,
+      "quantity": 250
     },
     "iron": {
       "chance": 0.35,
-      "quantity": 5
+      "quantity": 100
     },
     "tin": {
       "chance": 1,
-      "quantity": 2
+      "quantity": 10
+    }
+  },
+  "5": {
+    "coal": {
+      "chance": 0.10,
+      "quantity": 250
+    },
+    "iron": {
+      "chance": 0.35,
+      "quantity": 250
+    },
+    "tin": {
+      "chance": 0.40,
+      "quantity": 100
+    },
+    "copper": {
+      "chance": 1,
+      "quantity": 10
+    }
+  },
+  "6": {
+    "coal": {
+      "chance": 0.05,
+      "quantity": 250
+    },
+    "iron": {
+      "chance": 0.15,
+      "quantity": 250
+    },
+    "tin": {
+      "chance": 0.30,
+      "quantity": 250
+    },
+    "copper": {
+      "chance": 0.4,
+      "quantity": 70
+    }
+  },
+  "7": {
+    "coal": {
+      "chance": 0.02,
+      "quantity": 250
+    },
+    "iron": {
+      "chance": 0.05,
+      "quantity": 250
+    },
+    "tin": {
+      "chance": 0.20,
+      "quantity": 250
+    },
+    "copper": {
+      "chance": 0.6,
+      "quantity": 250
+    },
+    "silver": {
+      "chance": 1,
+      "quantity": 10
+    }
+  },
+  "8": {
+    "coal": {
+      "chance": 0.02,
+      "quantity": 250
+    },
+    "iron": {
+      "chance": 0.05,
+      "quantity": 250
+    },
+    "tin": {
+      "chance": 0.10,
+      "quantity": 250
+    },
+    "copper": {
+      "chance": 0.30,
+      "quantity": 250
+    },
+    "silver": {
+      "chance": 1,
+      "quantity": 70
+    }
+  },
+  "9": {
+    "coal": {
+      "chance": 0.02,
+      "quantity": 250
+    },
+    "iron": {
+      "chance": 0.05,
+      "quantity": 250
+    },
+    "tin": {
+      "chance": 0.08,
+      "quantity": 250
+    },
+    "copper": {
+      "chance": 0.10,
+      "quantity": 250
+    },
+    "silver": {
+      "chance": 0.5,
+      "quantity": 250
+    },
+    "gold": {
+      "chance": 1,
+      "quantity": 100
     }
   }
 }
