@@ -1,0 +1,28 @@
+div.miner-site {
+    width: 78px;
+}
+
+div.miner-site div.miner,
+div.miner-site div.ores {
+    width: 78px;
+    height: 75px;
+}
+
+div.miner-site div.ores {
+    background: url("../img/ores.svg");
+    background-size: 78px 75px;
+}
+
+div.miner-site div.miner.active {
+    background: url("../img/miner.gif");
+}
+
+div#office .office-center {
+    text-align: center;
+    padding: 20px;
+    height: 60px;
+}
+
+div#office .office-center:hover {
+    font-size: 120%;
+}

@@ -1,0 +1,16 @@
+<div class="modal-header">
+    <h4 class="modal-title" id="myModalLabel">Sell center</h4>
+</div>
+<div class="modal-body">
+    <div class="container-fluid">
+        <div class="row" ng-repeat="resourceName in sellCenter.resources.getNames()" style="padding: 4px;">
+            <div class="col-sm-2">
+                <button type="button" class="btn btn-default" ng-click="sellCenter.sell(resourceName)"
+                                                              ng-show="sellCenter.resources.getCost(resourceName)">Sell all</button>
+            </div>
+            <div class="col-sm-2">{{resourceName}}:</div>
+            <div class="col-sm-2">x{{sellCenter.resources[resourceName] | number}}</div>
+            <div class="col-sm-2">{{sellCenter.resources.getCost(resourceName) | currency}}</div>
+        </div>
+    </div>
+</div>
