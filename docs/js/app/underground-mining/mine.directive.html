@@ -1,0 +1,24 @@
+<div id="mine">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="panel panel-default" ng-repeat="level in mine.levels.levels">
+                <div class="panel-heading">Mining level: {{level.depth | number}}km, workers: {{level.workers.length | number}}</div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-sm-1">
+                            <div class="miner-site">
+                                <div class="ores btn" data-toggle="tooltip" data-placement="bottom" title="Click to dig there" ng-click="mine.dig(level)"></div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-1" ng-repeat="worker in level.workers">
+                            <div class="miner-site">
+                                <div class="miner active"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

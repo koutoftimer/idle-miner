@@ -1,0 +1,11 @@
+<div id="resources">
+    <div class="row">
+        <div class="col-sm-1" ng-repeat="resourceName in inline.resources.getNames()">
+            {{resourceName}}: <br>
+            <span class="badge">{{inline.resources[resourceName] | number}}</span>
+        </div>
+        <div class="col-sm-4">
+            Cash: {{inline.resources.cash | currency}}
+        </div>
+    </div>
+</div>
