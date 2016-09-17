@@ -26,7 +26,7 @@
 
     function configureRouter($locationProvider, $urlRouterProvider) {
         $locationProvider.html5Mode({
-            enabled: true,
+            enabled: false,
             requireBase: false
         });
         $urlRouterProvider
