@@ -6,7 +6,7 @@ function configureGrunt(grunt) {
         connect: {
             server: {
                 options: {
-                    base: 'dist/',
+                    base: 'docs/',
                     port: 8000
                 }
             }
@@ -17,7 +17,7 @@ function configureGrunt(grunt) {
                     expand: true,
                     cwd: 'src/',
                     src: ['**/*.html', '!libs/**/*.html'],
-                    dest: 'dist/'
+                    dest: 'docs/'
                 }]
             },
             css: {
@@ -25,7 +25,7 @@ function configureGrunt(grunt) {
                     expand: true,
                     cwd: 'src/',
                     src: ['**/*.css', '!libs/**/*.css'],
-                    dest: 'dist/'
+                    dest: 'docs/'
                 }]
             },
             json: {
@@ -37,7 +37,7 @@ function configureGrunt(grunt) {
                         '!libs/**/*.json',
                         '!bower.json'
                     ],
-                    dest: 'dist/'
+                    dest: 'docs/'
                 }]
             },
             images: {
@@ -45,7 +45,7 @@ function configureGrunt(grunt) {
                     expand: true,
                     cwd: 'src/',
                     src: 'img/*',
-                    dest: 'dist/'
+                    dest: 'docs/'
                 }]
             },
             libs: {
@@ -54,25 +54,25 @@ function configureGrunt(grunt) {
                         expand: true,
                         cwd: 'src/libs/',
                         src: 'angular/angular.min.js',
-                        dest: 'dist/libs/'
+                        dest: 'docs/libs/'
                     },
                     {
                         expand: true,
                         cwd: 'src/libs/',
                         src: 'angular-local-storage/dist/angular-local-storage.min.js',
-                        dest: 'dist/libs/'
+                        dest: 'docs/libs/'
                     },
                     {
                         expand: true,
                         cwd: 'src/libs/',
                         src: 'angular-ui-router/release/angular-ui-router.min.js',
-                        dest: 'dist/libs/'
+                        dest: 'docs/libs/'
                     },
                     {
                         expand: true,
                         cwd: 'src/libs/',
                         src: 'bootstrap/dist/css/bootstrap.min.css',
-                        dest: 'dist/libs/'
+                        dest: 'docs/libs/'
                     }
                 ]
             }
@@ -80,7 +80,7 @@ function configureGrunt(grunt) {
         concat: {
             js: {
                 src: 'src/js/**/*.js',
-                dest: 'dist/js/app.js'
+                dest: 'docs/js/app.js'
             }
         },
         uglify: {
@@ -89,8 +89,8 @@ function configureGrunt(grunt) {
                 sourceMap: true
             },
             js: {
-                src: 'dist/js/app.js',
-                dest: 'dist/js/app.min.js'
+                src: 'docs/js/app.js',
+                dest: 'docs/js/app.min.js'
             }
         },
         watch: {
